@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<title>Terms</title>
+	</head>
+	
+	<body>
+		<script>
+//		chrome.tabs.getSelected(null, function(tab) {
+//			chrome.tabs.sendRequest(tab.id, {method: "getText"}, function(response) {
+//				if(response.method=="getText"){
+//					alltext = response.data;
+//				}
+//			});
+//		});
+		
+		chrome.tabs.query({active: true, currentWindow: true}, function(Tab){
+			chrome.runtime.sendMessage(Tab[0].id, {method: "getText"}, function(response){
+				if(response.method=="getText"){
+						alltext=response.data;
+				}
+			});
+		});
+		document.getElementById("text").innerHTML="alltext";
+	</script>
+	</body>
+</html>
